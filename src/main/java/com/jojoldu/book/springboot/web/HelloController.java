@@ -14,6 +14,13 @@ public class HelloController {
 
     @GetMapping("/hello/dto")
     public HelloResponseDto helloDto(@RequestParam("name") String name, @RequestParam("amount") int amount){
-        return new HelloResponseDto(name, amount);
+        try{
+            return new HelloResponseDto(name, amount);
+
+        }catch (IllegalArgumentException exception){
+            return null;
+        }catch(Exception e){
+            return null;
+        }
     }
 }
