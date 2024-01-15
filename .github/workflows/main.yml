@@ -36,6 +36,10 @@ jobs:
     - name: Copy Jar
       run: cp ./build/libs/*.jar ./deploy/
 
+    # appspec.yml Copy
+    - name: Copy appspec
+      run: cp appspec.yml ./deploy/
+
     # 압축 파일 형태로 전달
     - name: Make zip file
       run: zip -r -qq -j ./freelec-springboot2-webservice.zip ./deploy
@@ -50,3 +54,17 @@ jobs:
         --region ap-northeast-2 \
         --acl private \
         ./freelec-springboot2-webservice.zip s3://jojoldu-gsb-practice-build/
+
+    # Deploy
+    - name: Deploy
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      run: |
+        aws deploy create-deployment \
+        --application-name springboot2-jojolduBook \
+        --deployment-group-name freelec-springboot2-webservice-group \
+        --file-exists-behabior OVERWRITE \
+        --s3-location bucket=jojoldu-gsb-practice-build,bundleType=zip,key=freelec-springboot2-webservice.zip \
+        --region ap-northeast-2
+
