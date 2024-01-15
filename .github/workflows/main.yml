@@ -62,7 +62,7 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
         aws deploy create-deployment \
-        --application-name springboot2-jojolduBook \
+        --application-name freelec-springboot2-webservice \
         --deployment-group-name freelec-springboot2-webservice-group \
         --file-exists-behavior OVERWRITE \
         --s3-location bucket=jojoldu-gsb-practice-build,bundleType=zip,key=freelec-springboot2-webservice.zip \
