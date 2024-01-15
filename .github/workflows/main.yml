@@ -64,7 +64,7 @@ jobs:
         aws deploy create-deployment \
         --application-name springboot2-jojolduBook \
         --deployment-group-name freelec-springboot2-webservice-group \
-        --file-exists-behabior OVERWRITE \
+        --file-exists-behavior OVERWRITE \
         --s3-location bucket=jojoldu-gsb-practice-build,bundleType=zip,key=freelec-springboot2-webservice.zip \
         --region ap-northeast-2
 
